@@ -2,46 +2,44 @@ package com.example.NewBeginning;
 
 import java.util.Scanner;
 
-class node{
-    int data;
-    node next;
-    node(int x) {
+class Node{
+        int data;
+        Node next;
+        Node(int x) {
         data = x;
-    }
-}
+        }
+ }
+class StackUsingLinkedlistUsingReturn {
 
+    public Node push(int x, Node top){
 
-class StackUsingLinkedlist{
-
-    node top;
-    StackUsingLinkedlist(){
-        top = null;
-    }
-
-    public void push(int x){
-
-        node tempnode = new node(x);
+        Node tempnode = new Node(x);
         if(top == null){
             top = tempnode;
+            return top;
         }
         else{
             tempnode.next = top;
             top = tempnode;
+            return top;
         }
 
     }
 
-    public boolean isEmpty(){
-           return top == null;
+    public boolean isEmpty(Node top){
+        return top == null;
     }
-    public void pop(){
+    public Node pop(Node top){
         if(top == null){
             System.out.println("Stack Underflow");
+            return null;
         }
-        else
-        top = top.next;
+        else {
+            top = top.next;
+            return top;
+        }
     }
-    public int peek(){
+    public int peek(Node top){
         if(top == null){
             return 0;
         }
@@ -49,8 +47,8 @@ class StackUsingLinkedlist{
             return top.data;
 
     }
-    public void display(){
-        node ptr = top;
+    public void display(Node top){
+        Node ptr = top;
         if(top == null)
             System.out.println("Stack is Empty");
         else {
@@ -62,10 +60,10 @@ class StackUsingLinkedlist{
     }
 
 }
-
-public class ImplementationStack {
+public class ImplementationStackUsingReturnType {
     public static void main(String[] args) {
-        StackUsingLinkedlist st = new StackUsingLinkedlist();
+        Node top = null;
+        StackUsingLinkedlistUsingReturn st = new StackUsingLinkedlistUsingReturn();
         while (true) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter 1. Push");
@@ -78,28 +76,28 @@ public class ImplementationStack {
                 case 1:
                     System.out.println("Enter the value to be pushed into the stack");
                     int push_var = sc.nextInt();
-                    st.push(push_var);
-                    st.display();
+                    top = st.push(push_var,top);
+                    st.display(top);
                     break;
 
                 case 2:
-                    st.pop();
-                    st.display();
+                    top = st.pop(top);
+                    st.display(top);
                     break;
 
                 case 3:
-                    int p = st.peek();
-                    System.out.println("The peek value pf the stack is" + p);
-                    st.display();
+                    int p = st.peek(top);
+                    System.out.println("The peek value of the stack is " + p);
+                    st.display(top);
                     break;
 
                 case 4:
-                    boolean flag = st.isEmpty();
+                    boolean flag = st.isEmpty(top);
                     if (flag == true)
                         System.out.println("Stack is Empty");
                     else
                         System.out.println("Stack contain some values");
-                    st.display();
+                    st.display(top);
                     break;
 
                 case 5:
@@ -114,3 +112,4 @@ public class ImplementationStack {
         }
     }
 }
+
